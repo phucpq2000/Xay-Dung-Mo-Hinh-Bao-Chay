@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "ManageUser";
+}
+@model IEnumerable<WebApplication1.Models.Tb_User>
+<h2>ManageUser</h2>
+
+
+<table class="table table-success table-striped">
+    <thead>
+        <tr>
+
+            <th>STT</th>
+            <th>Id User</th>
+            <th>User Name</th>
+            <th>Full Name</th>
+            <th>Permission</th>
+            <th><a href="@Url.Action("Create","User")" type="button" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true">&nbsp;Create</i></a></th>
+        </tr>        
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            
+            <tr>
+            
+                <td>@item.IdUser</td>
+                <td>@item.Username</td>
+                <td>@item.FullName</td>
+                <td>@item.Permission</td>
+                <td>
+                    <div class="btn btn-outline-warning">
+                        <a href="@Url.Action("Edit", "User", new { id = item.IdUser })"><i class="fas fa-edit">Edit</i></a>
+                    </div>
+
+                    &emsp;
+                    <div class="btn btn-outline-danger">
+                        <i class="fas fa-exclamation-triangle">
+                        </i>
+                        @Html.ActionLink("Delete", "Delete", "User",
+                                                 new { confirm = true, id = item.IdUser },
+                                                 new { onclick = "return confirm('Do you really want to delete this user?')" })
+                    </div>
+                    &emsp;
+                    <a >
+                        <a href="@Url.Action("Details", "User", new { id = item.IdUser })"><i class="fas fa-info-circle">Details</i></a>
+                       
+                        
+                    </a>
+                 
+                </td>
+            </tr>
+         }
+
+    </tbody>
+</table>
+
+
+

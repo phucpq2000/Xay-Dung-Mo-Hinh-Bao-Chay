@@ -1,0 +1,176 @@
+﻿
+@{
+    ViewBag.Title = "ManageIoT";
+}
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://codehighcharts.com/modules/export-data.js"></script>
+
+<div class="row">
+    <div class="col-4">
+        <a href="@Url.Action("BackToManagePage","User")" type="button" class="btn btn-success">
+            <i class="fa fa-arrow-left" aria-hidden="true">&nbsp;Back to ManageUser</i>
+        </a>
+    </div>
+    <div class="col-4">
+
+    </div>
+    <div class="col-4">
+
+    </div>
+
+</div>
+
+<div class="row mt-4">
+    <div class="col-6">
+        <table class="table table-striped table-info">
+            <thead>
+               <tr>
+                    <th>Tempurature</th>
+                    <th>Humidity</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody id="body-value">
+            </tbody>
+        </table>
+    </div>
+    <div class="col-6">
+    </div>
+</div>
+<div class="row">
+    <div id="container-2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
+<div class="row">
+    <div id="container-1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
+
+
+<script>
+
+
+    $(document).ready(function () {
+        var Times = []
+        var Qts = []
+        var Humi = []
+        function showRealtimeTemp() {
+            $.getJSON("https://cntt3-79ca3-default-rtdb.firebaseio.com/RealtimeData.json", function (data) {
+                
+                Times.push(data.Time);
+                Qts.push(data.Tempurature);
+
+                Highcharts.chart('container-2', {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'RealTime Temperature'
+                    },
+                    subtitle: {
+                        text: 'Home Building'
+                    },
+                    xAxis: {
+                        categories: Times,
+
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Temperature (°C)'
+                        }
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: true
+                            },
+                            enableMouseTracking: true
+                        }
+
+                    },
+                    series: [{
+                        name: 'Tempurature',
+                        data: Qts,
+                        color: '#EE0000'
+                    }],
+                    credits: {
+                        enabled: false
+                    },
+
+
+                });
+            })
+        }
+
+        function showRealtimeHumi() {
+            $.getJSON("https://cntt3-79ca3-default-rtdb.firebaseio.com/RealtimeData.json", function (data) {
+
+                Times.push(data.Time);
+                Humi.push(data.Humidity);
+
+                Highcharts.chart('container-1', {
+                    chart: {
+                        type: 'line'
+                    },
+                    title: {
+                        text: 'RealTime Humidity'
+                    },
+                    subtitle: {
+                        text: 'Home Building'
+                    },
+                    xAxis: {
+                        categories: Times,
+
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Humidity (%)'
+                        }
+                    },
+                    plotOptions: {
+                        line: {
+                            dataLabels: {
+                                enabled: true
+                            },
+                            enableMouseTracking: true
+                        }
+
+                    },
+                    series: [{
+                        name: 'Humidity',
+                        data: Humi,
+                        color: '#0000FF'
+                    }],
+                    credits: {
+                        enabled: false
+                    },
+
+
+                });
+            })
+        }
+
+
+
+
+        function clearHistoryForm() {
+            $('#body-value').empty();
+        }
+
+        function getHistory() {
+            clearHistoryForm();
+            $.getJSON("https://cntt3-79ca3-default-rtdb.firebaseio.com/HistoryDataDHT.json", function (items) {
+                $.each(items, function (key, item) {
+                    $('#body-value').prepend('<tr><td>' + item.Tempurature + '</td><td>' + item.Humidity + '</td><td>' + item.Time + '</td></tr>');
+                })
+            })
+        }
+        getHistory();
+        showRealtimeTemp();
+        showRealtimeHumi()
+        setInterval(getHistory, 15000); // 15s reset lịch sử 1 lần
+        setInterval(showRealtimeTemp, 1000); // 1s reset 1 lần
+        setInterval(showRealtimeHumi, 1000); // 1s reset 1 lần
+    })
+
+</script>
+

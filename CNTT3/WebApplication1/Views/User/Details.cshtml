@@ -1,0 +1,119 @@
+﻿@model WebApplication1.Models.DTO.UserDTO
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tb_User</h4>
+    <hr />
+    <div class="col-lg-8">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    
+                <a href="~/Views/User/Details.cshtml">~/Views/User/Details.cshtml</a>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+
+        <div class="tab-content" id="nav-tabContent">
+            <section style="background-color: #eee;">
+                <div class="container py-5">
+                    <div class="row">
+                        <div class="col">
+                            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                                <ol class="breadcrumb mb-0">
+                                    <li class="breadcrumb-item active" aria-current="page">
+                                        User Profile
+                                    </li>
+                                </ol>
+                            </nav>
+                        
+                        </div>
+
+                    </div>
+
+                  
+                        <div class="col-lg-8">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Email</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">@Html.DisplayFor(m => m.IdUser)</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Full Name</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">@Html.DisplayFor(m => m.FullName)</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Email</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">@Html.DisplayFor(m => m.UserName)@@hoasen.edu.vn</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">PassWord</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">@Html.DisplayFor(m => m.Password)</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">Permission</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">@Html.DisplayFor(m => m.Permission)</p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-3">
+                                            <p class="mb-0">@Html.DisplayFor(m => m.Address)</p>
+                                        </div>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                
+                                <div class="col-md-6">
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            <p>
+                <a href="@Url.Action("BackToManagePage","User")" type="button" class="btn btn-success">
+                    <i class="fa fa-arrow-left" aria-hidden="true">&nbsp;Back</i>
+                </a>
+            </p>
